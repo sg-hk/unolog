@@ -1,0 +1,3 @@
+code to:
+- collect dht22 readings with a uno board, every minute
+- write them to a daily log

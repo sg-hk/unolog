@@ -2,8 +2,8 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-#define DHTPIN 2        // Pin where DHT22 is connected
-#define DHTTYPE DHT22   // Define sensor type (DHT22)
+#define DHTPIN 2        // pin where DHT22 is connected
+#define DHTTYPE DHT22   // define sensor type (DHT22)
 
 DHT dht(DHTPIN, DHTTYPE);
 

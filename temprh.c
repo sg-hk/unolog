@@ -13,7 +13,11 @@
 #define LOGDIR "/.local/share/unolog/"
 
 volatile sig_atomic_t stop_flag = 0;
-void handle_signal(int signal) {stop_flag = 1;}
+void handle_signal(int signal) 
+{
+        (void)signal; // suppress compiler warning
+        stop_flag = 1;
+}
 
 int main() {
         struct termios tty;
@@ -62,9 +66,9 @@ int main() {
                 if (current_day != last_logged_day) {
                         if (log_file) fclose(log_file);
                         snprintf(logpath, sizeof(logpath), 
-                                "%s%s%04d-%02d-%02d.log",
-                                getenv("HOME"), LOGDIR,
-                                t->tm_year+1900, t->tm_mon+1, current_day
+                                        "%s%s%04d-%02d-%02d.log",
+                                        getenv("HOME"), LOGDIR,
+                                        t->tm_year+1900, t->tm_mon+1, current_day
                                 );
                         log_file = fopen(logpath, "a+");
                         if (!log_file) {
