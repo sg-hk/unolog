@@ -87,6 +87,8 @@ int main() {
                         perror("serial read");
                         break;
                 } /* n == 0 is simply end of stream */
+
+                sleep(60); // matching arduino's 60s delay
         }
 
         if (log_file) fclose(log_file);

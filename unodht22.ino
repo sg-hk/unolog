@@ -17,11 +17,12 @@ void loop() {
         float hum = dht.readHumidity();  
 
         if (isnan(temp) || isnan(hum)) {
-                Serial.println("Failed to read from DHT sensor"); 
+          Serial.println("Failed to read from DHT sensor"); 
         } else {
-                Serial.print(temp);
-                Serial.print(",");
-                Serial.println(hum);
+          Serial.print(temp);
+          Serial.print("°C, ");
+          Serial.print(hum);
+          Serial.println("%");
         }
 
         delay(60000); // read every minute
