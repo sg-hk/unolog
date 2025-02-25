@@ -2,28 +2,28 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-#define DHTPIN 2        // pin where DHT22 is connected
-#define DHTTYPE DHT22   // define sensor type (DHT22)
+#define DHTPIN 2      
+#define DHTTYPE DHT22 
+#define SERIAL_BAUD 9600
 
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
-        Serial.begin(9600);
-        dht.begin();
+  Serial.begin(SERIAL_BAUD);
+  dht.begin();
 }
 
 void loop() {
-        float temp = dht.readTemperature();
-        float hum = dht.readHumidity();  
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
 
-        if (isnan(temp) || isnan(hum)) {
-          Serial.println("Failed to read from DHT sensor"); 
-        } else {
-          Serial.print(temp);
-          Serial.print("°C, ");
-          Serial.print(hum);
-          Serial.println("%");
-        }
+  if (!isnan(humidity) && !isnan(temperature)) {
+    /* first build the string, then output it
+     * this prevents partial reads from Serial.print()s */
+    char output[16];  
+    snprintf(output, sizeof(output), "%.1fC %.1f%%", temperature, humidity);
+    Serial.println(output);
+  }
 
-        delay(60000); // read every minute
+  delay(60000); // 1m
 }
